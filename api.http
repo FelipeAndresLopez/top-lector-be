@@ -1,0 +1,17 @@
+### Recuperar todos los usuarios
+GET http://localhost:3000/api/users
+
+
+### Recuperar un usuario
+GET http://localhost:3000/api/users/65f9f0fb8d0c35dd31104d14
+
+### Crear un nuevo usuario
+POST http://localhost:3000/api/users
+
+
+### Eliminar un usuario
+DELETE http://localhost:3000/api/users/:id
+
+
+### Actualizar un usuario
+PUT http://localhost:3000/api/users/:id
