@@ -7,11 +7,23 @@ GET http://localhost:3000/api/users/65f9f0fb8d0c35dd31104d14
 
 ### Crear un nuevo usuario
 POST http://localhost:3000/api/users
+Content-Type: application/json
 
+{
+  "name": "Silvia Pataquiva",
+  "email": "silviapataquiva23.com",
+  "password": "123456",
+  "photo": "https://i.pravatar.cc/300"
+}
 
 ### Eliminar un usuario
-DELETE http://localhost:3000/api/users/:id
+DELETE http://localhost:3000/api/users/65fb4594350f86f40cbf0846
 
 
 ### Actualizar un usuario
-PUT http://localhost:3000/api/users/:id
+PUT http://localhost:3000/api/users/65fb496d6daa62d4bd6b7356
+Content-Type: application/json
+
+{
+  "photo": "https://i.pravatar.cc/300"
+}
