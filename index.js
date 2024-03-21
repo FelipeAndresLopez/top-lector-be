@@ -22,6 +22,10 @@ app.use(cors())
 // body parser middleware
 app.use(express.json())
 
+app.get('/', (req, res) => {
+  res.send('Bienvenido a la API de Top Lector')
+})
+
 app.get('/api/users', (req, res) => {
   User.find()
     .then((users) => {
