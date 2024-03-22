@@ -1,9 +1,11 @@
 import mongoose from 'mongoose'
 
-const connectionString = process.env.MONGO_DB_URI
+const { MONGO_DB_URI, NODE_ENV } = process.env
+
+const connectionString = MONGO_DB_URI
 
 mongoose.connect(connectionString, {
-  dbName: 'top-lector-db'
+  dbName: NODE_ENV === 'test' ? 'top-lector-db-test' : 'top-lector-db'
 })
   .then(() => {
     console.log('MongoDB connected')
