@@ -1,6 +1,4 @@
-import supertest from 'supertest'
-import { app } from '../index.js'
-const api = supertest(app)
+import { User } from '../models/User.js'
 
 export const mockUsers = [
   {
@@ -19,11 +17,7 @@ export const mockUsers = [
   }
 ]
 
-export const getAllUsers = async ({ key = 'name' } = {}) => {
-  const response = await api.get('/api/users')
-  const data = response.body.map((user) => user[key])
-  return {
-    response,
-    data
-  }
+export const getAllUsers = async () => {
+  const usersDB = await User.find({})
+  return usersDB.map((user) => user.toJSON())
 }

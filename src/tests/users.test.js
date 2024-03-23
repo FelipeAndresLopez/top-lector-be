@@ -33,6 +33,7 @@ describe('GET all users', () => {
 
 describe('POST a new user', () => {
   test('a user can be created', async () => {
+    const usersAtStart = await getAllUsers()
     const newUser = {
       name: 'John Doe',
       email: 'K9hQH@example.com',
@@ -46,33 +47,33 @@ describe('POST a new user', () => {
       .send(newUser)
       .expect(200)
 
-    const { data: emails, response } = await getAllUsers({ key: 'email' })
+    const usersAtEnd = await getAllUsers()
 
-    expect(response.body).toHaveLength(mockUsers.length + 1)
+    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
+    const emails = usersAtEnd.map((u) => u.email)
     expect(emails).toContain(newUser.email)
   })
 })
 
 describe('DELETE a user', () => {
   test('a user can be deleted', async () => {
-    const { response: responseBeforeDelete } = await getAllUsers()
-    const users = responseBeforeDelete.body
+    const usersAtStart = await getAllUsers()
     await api
-      .delete(`/api/users/${users[0].id}`)
+      .delete(`/api/users/${usersAtStart[0].id}`)
       .expect(204)
 
-    const { response: responseAfterDelete } = await getAllUsers()
-    expect(responseAfterDelete.body).toHaveLength(mockUsers.length - 1)
-    expect(responseAfterDelete.body).not.toContain(users[0])
+    const usersAtEnd = await getAllUsers()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length - 1)
+    expect(usersAtEnd).not.toContain(usersAtStart[0])
   })
 
   test('a user that does not exist can not be deleted', async () => {
-    const { response } = await getAllUsers()
+    const users = await getAllUsers()
     await api
       .delete('/api/users/123456')
       .expect(400)
 
-    expect(response.body).toHaveLength(mockUsers.length)
+    expect(users).toHaveLength(users.length)
   })
 })
 
