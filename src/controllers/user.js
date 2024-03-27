@@ -6,7 +6,12 @@ export class UserController {
   }
 
   getAll = async (req, res, next) => {
-    const users = await this.model.find()
+    const users = await this.model.find().populate('books', {
+      title: 1,
+      author: 1,
+      rating: 1,
+      userComment: 1
+    })
     res.json(users)
   }
 
@@ -31,9 +36,9 @@ export class UserController {
     })
     try {
       const savedUser = await user.save()
-      res.json(savedUser)
+      res.status(201).json(savedUser)
     } catch (error) {
-      next(error)
+      res.status(400).json(error)
     }
   }
 

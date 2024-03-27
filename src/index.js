@@ -8,7 +8,11 @@ import './mongo.js'
 
 // models
 import { User } from './models/User.js'
-import { createUseRouter } from './routes/users.js'
+import { Book } from './models/Book.js'
+
+// routes
+import { createUseRouter as createUserRouter } from './routes/users.js'
+import { createBookRouter } from './routes/books.js'
 
 const app = express()
 
@@ -27,7 +31,8 @@ app.get('/', (req, res) => {
   res.send('Bienvenido a la API de Top Lector')
 })
 
-app.use('/api/users', createUseRouter({ userModel: User }))
+app.use('/api/users', createUserRouter({ userModel: User }))
+app.use('/api/books', createBookRouter({ bookModel: Book }))
 
 app.use((error, req, res, next) => {
   console.error(error)

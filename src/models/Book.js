@@ -1,10 +1,25 @@
 import { model, Schema } from 'mongoose'
 
 const bookSchema = Schema({
-  title: String,
-  author: String,
+  title: {
+    type: String,
+    required: true
+  },
+  author: {
+    type: String
+  },
   userComment: String,
-  rating: Number
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
+
 })
 
 bookSchema.set('toJSON', {

@@ -27,3 +27,35 @@ Content-Type: application/json
 {
   "photo": "https://i.pravatar.cc/300"
 }
+
+### Recuperar todos los libros
+GET http://localhost:3001/api/books
+
+
+### Recuperar un libro
+GET http://localhost:3001/api/books/66043e56127e03d5146ff72b
+
+
+### Crear un nuevo libro
+POST http://localhost:3001/api/books
+Content-Type: application/json
+
+{
+  "title": "Cien años de soledad",
+  "author": "Gabriel Garcia Marquez",
+  "userComment": "Genial libro",
+  "rating": 5,
+  "userId": "6604516b47198a924443a124"
+}
+
+### Eliminar un libro
+DELETE http://localhost:3001/api/books/66043e56127e03d5146ff72b
+
+
+### Actualizar un libro
+PUT http://localhost:3001/api/books/6604453baf69e57bfdc8a469
+Content-Type: application/json
+
+{
+  "rating": 9
+}
