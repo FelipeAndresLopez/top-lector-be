@@ -36,7 +36,7 @@ describe('POST a new user', () => {
     const usersAtStart = await getAllUsers()
     const newUser = {
       name: 'John Doe',
-      email: 'K9hQH@example.com',
+      email: 'jhondoe@me.com',
       password: 'password',
       photo: 'https://example.com/johndoe.jpg',
       books: []
@@ -45,13 +45,33 @@ describe('POST a new user', () => {
     await api
       .post('/api/users')
       .send(newUser)
-      .expect(200)
+      .expect(201)
 
     const usersAtEnd = await getAllUsers()
 
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
     const emails = usersAtEnd.map((u) => u.email)
     expect(emails).toContain(newUser.email)
+  })
+
+  test('creation fails with proper status code and message if user already exists', async () => {
+    const usersAtStart = await getAllUsers()
+
+    const newUser = {
+      name: 'John Doe',
+      email: 'K9hQH@example.com',
+      password: 'password',
+      photo: 'https://example.com/johndoe.jpg',
+      books: []
+    }
+    const result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+
+    expect(result.body.errors.email.message).toContain('`email` to be unique')
+    const usersAtEnd = await getAllUsers()
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
 
