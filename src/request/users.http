@@ -1,0 +1,29 @@
+### Recuperar todos los usuarios
+GET http://localhost:3001/api/users
+
+
+### Recuperar un usuario
+GET http://localhost:3001/api/users/65faf6c5709d594e6e1bee63
+
+### Crear un nuevo usuario
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "jhondoe@example.com",
+  "password": "789764",
+  "photo": "https://i.pravatar.cc/300"
+}
+
+### Eliminar un usuario
+DELETE http://localhost:3001/api/users/65fb496d6daa62d4bd6b7356
+
+
+### Actualizar un usuario
+PUT http://localhost:3001/api/users/65fb496d6daa62d4bd6b7356
+Content-Type: application/json
+
+{
+  "photo": "https://i.pravatar.cc/300"
+}

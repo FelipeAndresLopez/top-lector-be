@@ -11,8 +11,9 @@ import { User } from './models/User.js'
 import { Book } from './models/Book.js'
 
 // routes
-import { createUseRouter as createUserRouter } from './routes/users.js'
+import { createUserRouter } from './routes/users.js'
 import { createBookRouter } from './routes/books.js'
+import { createLoginRouter } from './routes/login.js'
 
 const app = express()
 
@@ -33,6 +34,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', createUserRouter({ userModel: User }))
 app.use('/api/books', createBookRouter({ bookModel: Book }))
+app.use('/api/login', createLoginRouter({ userModel: User }))
 
 app.use((error, req, res, next) => {
   console.error(error)
