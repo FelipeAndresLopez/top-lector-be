@@ -1,4 +1,5 @@
 import { User } from '../models/User.js'
+import jwt from 'jsonwebtoken'
 
 export class BookController {
   constructor ({ bookModel }) {
@@ -26,7 +27,26 @@ export class BookController {
   }
 
   create = async (req, res, next) => {
-    const { title, author, userComment, rating, userId } = req.body
+    const { title, author, userComment, rating } = req.body
+    const authorization = req.headers.authorization
+    let token = null
+
+    if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+      token = authorization.split(' ')[1]
+    }
+
+    let decodedToken = null
+
+    try {
+      decodedToken = jwt.verify(token, process.env.SECRET)
+    } catch {}
+
+    if (!token || !decodedToken?.id) {
+      return res.status(401).json({ error: 'token missing or invalid' })
+    }
+
+    const userId = decodedToken?.id
+
     const user = await User.findById(userId)
 
     const Book = this.model

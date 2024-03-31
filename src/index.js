@@ -14,6 +14,7 @@ import { Book } from './models/Book.js'
 import { createUserRouter } from './routes/users.js'
 import { createBookRouter } from './routes/books.js'
 import { createLoginRouter } from './routes/login.js'
+import { handleErrors } from './middleware/handleErrors.js'
 
 const app = express()
 
@@ -36,13 +37,7 @@ app.use('/api/users', createUserRouter({ userModel: User }))
 app.use('/api/books', createBookRouter({ bookModel: Book }))
 app.use('/api/login', createLoginRouter({ userModel: User }))
 
-app.use((error, req, res, next) => {
-  console.error(error)
-  if (error.name === 'CastError') {
-    return res.status(400).send({ error: 'malformatted id' })
-  }
-  res.status(500).end()
-})
+app.use(handleErrors)
 
 app.use((req, res, next) => {
   res.status(404).send('Not Found')

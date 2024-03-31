@@ -9,13 +9,13 @@ GET http://localhost:3001/api/books/66043e56127e03d5146ff72b
 ### Crear un nuevo libro
 POST http://localhost:3001/api/books
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impob25kb2VAZXhhbXBsZS5jb20iLCJpZCI6IjY2MDQ1MTZiNDcxOThhOTI0NDQzYTEyNCIsImlhdCI6MTcxMTkyMDA1MX0.Jmz0UaSkpN14-7k2XY2KsabUenF50GyZgKPvJ3U8euk
 
 {
-  "title": "Cien años de soledad",
-  "author": "Gabriel Garcia Marquez",
+  "title": "La psicología del dinero",
+  "author": "Morgan Housel",
   "userComment": "Genial libro",
-  "rating": 5,
-  "userId": "6604516b47198a924443a124"
+  "rating": 5
 }
 
 ### Eliminar un libro
