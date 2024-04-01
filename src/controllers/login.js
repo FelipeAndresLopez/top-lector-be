@@ -8,6 +8,7 @@ export class LoginController {
   }
 
   login = async (req, res, next) => {
+    const SEVEN_DAYS_IN_SECONDS = 60 * 60 * 24 * 7
     const { email, password } = req.body
     const user = await User.findOne({ email })
     const isPasswordCorrect = user === null
@@ -27,7 +28,8 @@ export class LoginController {
 
     const token = jwt.sign(
       userForToken,
-      process.env.SECRET
+      process.env.SECRET,
+      { expiresIn: SEVEN_DAYS_IN_SECONDS }
     )
 
     res.send({
