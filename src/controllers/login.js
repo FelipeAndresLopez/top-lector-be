@@ -35,6 +35,7 @@ export class LoginController {
     res.send({
       name: user.name,
       email: user.email,
+      id: user._id,
       token
     })
   }
