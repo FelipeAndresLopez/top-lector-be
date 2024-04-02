@@ -3,13 +3,18 @@ const ERROR_HANDLERS = {
   JsonWebTokenError: ({ res }) => res
     .status(401)
     .json({ error: 'invalid token' }),
-  ValidationError: ({ res, err }) => res
-    .status(401)
-    .json({ error: err.message }),
+  ValidationError: ({ res, err }) => {
+    return res
+      .status(401)
+      .json({ error: err.message })
+  },
   defaultError: ({ res }) => res.status(500).end(),
   TokenExpiredError: ({ res }) => res
     .status(401)
-    .json({ error: 'token expired' })
+    .json({ error: 'token expired' }),
+  PayloadTooLargeError: ({ res }) => res
+    .status(413)
+    .json({ error: 'payload too large' })
 }
 
 export const handleErrors = (err, req, res, next) => {

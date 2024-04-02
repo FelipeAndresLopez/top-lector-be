@@ -3,7 +3,7 @@ GET http://localhost:3001/api/users
 
 
 ### Recuperar un usuario
-GET http://localhost:3001/api/users/65faf6c5709d594e6e1bee63
+GET http://localhost:3001/api/users/6604516b47198a924443a124
 
 ### Crear un nuevo usuario
 POST http://localhost:3001/api/users

@@ -17,7 +17,12 @@ export class UserController {
 
   getById = async (req, res, next) => {
     const { id } = req.params
-    const user = await this.model.findById(id)
+    const user = await this.model.findById(id).populate('books', {
+      title: 1,
+      author: 1,
+      rating: 1,
+      userComment: 1
+    })
     if (user) {
       return res.json(user)
     }
@@ -38,9 +43,6 @@ export class UserController {
       const savedUser = await user.save()
       res.status(201).json(savedUser)
     } catch (error) {
-      if (error.name === 'ValidationError') {
-        return res.status(400).json(error?.message)
-      }
       next(error)
     }
   }

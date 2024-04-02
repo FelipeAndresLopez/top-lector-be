@@ -28,6 +28,6 @@ userSchema.set('toJSON', {
   }
 })
 
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(uniqueValidator, { message: '{VALUE} already in use' })
 
 export const User = model('User', userSchema)
