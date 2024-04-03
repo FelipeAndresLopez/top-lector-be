@@ -19,11 +19,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impob25kb
 }
 
 ### Eliminar un libro
-DELETE http://localhost:3001/api/books/66043e56127e03d5146ff72b
+DELETE http://localhost:3001/api/books/660d6bed9dc223b8a808fcde
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImZlbGlwZWFuZHJlc2xvcGV6OTFAZ21haWwuY29tIiwiaWQiOiI2NjBjOGE5YTE4YzM5MjViMGZhNDZlMmIiLCJpYXQiOjE3MTIxNzc3MDUsImV4cCI6MTcxMjc4MjUwNX0.io5zxxryEXBicLE1BLWEyMeoBRDgcKO1In9a5YcgJxM
 
 
 ### Actualizar un libro
-PUT http://localhost:3001/api/books/6604453baf69e57bfdc8a469
+PUT http://localhost:3001/api/books/660d67399dc223b8a808fca4
 Content-Type: application/json
 
 {

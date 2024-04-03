@@ -6,9 +6,7 @@ export class BookController {
   }
 
   getAll = async (req, res, next) => {
-    const books = await this.model.find().populate('user', {
-      books: 0
-    })
+    const books = await this.model.find()
     res.json(books)
   }
 
@@ -74,7 +72,12 @@ export class BookController {
 
   delete = async (req, res, next) => {
     const { id } = req.params
+    const { userId } = req
+    const user = await User.findById(userId)
+
     try {
+      user.books = user.books.filter(book => book.toString() !== id)
+      await user.save()
       const removedBook = await this.model.findByIdAndDelete(id)
       if (removedBook) {
         return res.json(removedBook)
