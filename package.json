@@ -7,6 +7,7 @@
     "start": "NODE_ENV=production node api/index.js",
     "dev": "NODE_ENV=development node --watch ./src/index.js",
     "test": "NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --silent --verbose",
+    "start:test": "NODE_ENV=test node api/index.js",
     "test:watch": "npm run test -- --watch",
     "vercel-build": "echo hello"
   },

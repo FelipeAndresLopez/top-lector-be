@@ -14,6 +14,9 @@ import { Book } from './models/Book.js'
 import { createUserRouter } from './routes/users.js'
 import { createBookRouter } from './routes/books.js'
 import { createLoginRouter } from './routes/login.js'
+import { createTestingRouter } from './routes/testing.js'
+
+// middlewares
 import { handleErrors } from './middleware/handleErrors.js'
 
 const app = express()
@@ -36,6 +39,10 @@ app.get('/', (req, res) => {
 app.use('/api/users', createUserRouter({ userModel: User }))
 app.use('/api/books', createBookRouter({ bookModel: Book }))
 app.use('/api/login', createLoginRouter({ userModel: User }))
+
+if (process.env.NODE_ENV === 'test') {
+  app.use('/api/testing', createTestingRouter())
+}
 
 app.use(handleErrors)
 
